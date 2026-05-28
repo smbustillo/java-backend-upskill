@@ -12,7 +12,7 @@ public record Account (
             double balance
     ){
 
-        if(accountId < 0) {
+        if(accountId <= 0) {
             throw new IllegalArgumentException("El id es obligatorio");
         }
 
