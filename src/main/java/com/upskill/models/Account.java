@@ -1,12 +1,21 @@
 package com.upskill.models;
 
-public record Account (
-        long accountId,
-        String ownerName,
-        double balance
-) {
+import java.util.Objects;
 
-    public static Account of(
+public final class Account {
+
+    //Atributos
+    private final long accountId;
+    private final String ownerName;
+    private final double balance;
+
+    private Account(long accountId, String ownerName, double balance){
+        this.accountId = accountId;
+        this.ownerName = ownerName;
+        this.balance = balance;
+    }
+
+    public static Account create(
             long accountId,
             String ownerName,
             double balance
@@ -25,5 +34,37 @@ public record Account (
         }
 
         return new Account(accountId,ownerName,balance);
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Account other)) {
+            return false;
+        }
+
+        return Objects.equals(this.accountId, other.accountId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountId);
+    }
+
+    public long getAccountId() {
+        return accountId;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 }
